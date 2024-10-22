@@ -1,0 +1,587 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>846,7089.333333333333</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="50">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>System.Globalization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="80">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="771.3333333333334,7024.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="inputPDFFile" />
+      <Variable x:TypeArguments="x:String" Default="[in_Config(&quot;OutputFolderSuccessPath&quot;).ToString]" Name="out_SuccessPDF" />
+      <Variable x:TypeArguments="x:String" Name="InvoiceQuantityforServiceFee" />
+      <Variable x:TypeArguments="x:String" Name="InvoiceDate" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_result" />
+      <Variable x:TypeArguments="x:String" Name="invoiceBillToName" />
+      <Variable x:TypeArguments="x:String" Name="InvoiceNumber" />
+      <Variable x:TypeArguments="x:String" Default="[in_Config(&quot;OutputFolderFailPath&quot;).ToString]" Name="output_failedpdf" />
+      <Variable x:TypeArguments="x:String" Name="InvoiceUnitPriceForServiceFee" />
+      <Variable x:TypeArguments="x:String" Name="InvoiceQuantityForAddService" />
+      <Variable x:TypeArguments="x:String" Name="InvoiceUnitPriceForAddService" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage sap2010:Annotation.AnnotationText="This log message indicates the start of the process for the current transaction item. It helps track the workflow execution in the logs." DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="709.3333333333334,238.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:LogMessage>
+    <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="709.3333333333334,88.66666666666667" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
+    <Sequence sap2010:Annotation.AnnotationText="Add the data to queue" DisplayName="Processing each PDF file" sap:VirtualizedContainerService.HintSize="709.3333333333334,6530.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign sap2010:Annotation.AnnotationText="This annotation succinctly describes the purpose of the assignment activity, which is crucial for handling and processing the PDF files within  process." DisplayName="Assign- inputPDFFile" sap:VirtualizedContainerService.HintSize="647.3333333333334,169.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_1">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[inputPDFFile]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[in_Config("InputFolderPath").ToString]</InArgument>
+        </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Assign>
+      <ui:LogMessage sap2010:Annotation.AnnotationText="This activity logs the value of the inputPDFFile variable to provide visibility into the file being processed. Useful for debugging and tracking the workflow execution." DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="647.3333333333334,169.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;inputPDFFile value: &quot; + inputPDFFile]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:LogMessage>
+      <ui:ForEachFileX sap2010:Annotation.AnnotationText="This annotation effectively communicates that the &quot;For Each&quot; activity is looping through each file found in the designated folder, which is essential for processing multiple PDF invoices" DisplayName="For Each File in Folder" Filter="*.pdf" Folder="[inputPDFFile]" sap:VirtualizedContainerService.HintSize="647.3333333333334,6050.666666666667" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+        <ui:ForEachFileX.Body>
+          <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
+            <ActivityAction.Argument1>
+              <DelegateInArgument x:TypeArguments="si:FileInfo" Name="CurrentFile" />
+            </ActivityAction.Argument1>
+            <ActivityAction.Argument2>
+              <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
+            </ActivityAction.Argument2>
+            <Sequence sap2010:Annotation.AnnotationText="" DisplayName="Do" sap:VirtualizedContainerService.HintSize="613.3333333333334,5712.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_7">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage sap2010:Annotation.AnnotationText="This activity logs the beginning of the file reading process, specifically noting the name of the file being processed. This log entry aids in tracking workflow execution and diagnosing issues." DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="551.3333333333334,255.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Trace" Message="[&quot;Start to read the file for &quot; + CurrentFile.Name]">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </ui:LogMessage>
+              <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="551.3333333333334,5338.666666666667" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <TryCatch.Try>
+                  <Sequence DisplayName="Success getting of data" sap:VirtualizedContainerService.HintSize="512.6666666666666,5076.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <uix:NApplicationCard sap2010:Annotation.AnnotationText="Opens the PDF document to extract invoice data accurately." AttachMode="ByInstance" CloseMode="Always" DisplayName="Use Application: Billing Invoice Template - Adobe Acrobat Reader (64-bit)" sap:VirtualizedContainerService.HintSize="450.6666666666667,4172.666666666667" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" OpenMode="Always" ScopeGuid="b70bcde7-be8f-42ec-a093-12fb41598a23" Version="V2" WindowResize="Maximize">
+                      <uix:NApplicationCard.Body>
+                        <ActivityAction x:TypeArguments="x:Object">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Do Get the Information from the pdf" sap:VirtualizedContainerService.HintSize="416,3812.6666666666665" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="354,179.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Info" Message="[CurrentFile.Name]" />
+                            <uix:NKeyboardShortcuts ActivateBefore="True" sap2010:Annotation.AnnotationText="Enhances OCR accuracy by zooming in on the PDF document contents." ClickBeforeMode="None" DisplayName="Keyboard Shortcuts-Zoom in on the PDF document." sap:VirtualizedContainerService.HintSize="354,300.6666666666667" sap2010:WorkflowViewState.IdRef="NKeyboardShortcuts_3" ScopeIdentifier="b70bcde7-be8f-42ec-a093-12fb41598a23" Shortcuts="[d(hk)][d(ctrl)]0[u(ctrl)][u(hk)]" Version="V3">
+                              <uix:NKeyboardShortcuts.VerifyOptions>
+                                <uix:VerifyExecutionOptions DisplayName="{x:Null}" Mode="Appears">
+                                  <uix:VerifyExecutionOptions.Retry>
+                                    <InArgument x:TypeArguments="x:Boolean" />
+                                  </uix:VerifyExecutionOptions.Retry>
+                                  <uix:VerifyExecutionOptions.Timeout>
+                                    <InArgument x:TypeArguments="x:Double" />
+                                  </uix:VerifyExecutionOptions.Timeout>
+                                </uix:VerifyExecutionOptions>
+                              </uix:NKeyboardShortcuts.VerifyOptions>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NKeyboardShortcuts>
+                            <uix:NGetText sap2010:Annotation.AnnotationText="Extracts essential invoice Number from the PDF for processing." DisplayName="Get Invoice Number" sap:VirtualizedContainerService.HintSize="354,236.66666666666666" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="b70bcde7-be8f-42ec-a093-12fb41598a23" TextString="[InvoiceNumber]" Version="V3">
+                              <uix:NGetText.Target>
+                                <uix:TargetAnchorable CVScreenId="6f25e818-6a1e-4808-8bb1-6dd6f9698475" CvTextArea="1166, 284, 26, 11" CvType="AnyWordGroup" DesignTimeRectangle="1052, 314, 25, 12" DesignTimeScaleFactor="1.5" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='8249 ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl role='text' automationid='' /&gt;" Guid="aea1c555-7f17-4cab-9b57-8869a0e9df1f" ImageBase64="" InformativeScreenshot="c33ca77f36a7f4ebbf03bf00610ee4a5.png" ScopeSelectorArgument="&lt;wnd app='acrobat.exe' cls='AcrobatSDIWindow' title='Billing Invoice Template - Adobe Acrobat Reader (64-bit)' /&gt;" SearchSteps="FuzzySelector" Version="V4" Visibility="Interactive">
+                                  <uix:TargetAnchorable.Anchors>
+                                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                      <uix:Target CVScreenId="6f25e818-6a1e-4808-8bb1-6dd6f9698475" CvTextArea="1154, 261, 50, 10" CvTextArgument="INVOICE #" CvType="Text" DesignTimeRectangle="995, 290, 134, 15" ElementType="Icon" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl role='graphic' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl role='graphic' automationid='' /&gt;" Guid="3c8ad7d9-89b4-4eae-bb11-21ae11484ee6" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJQAAAARCAYAAAA7QYW/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAJHSURBVGhD7Zcxi5xAFMf9FJaWW11vY5EmxRUHNlsc6a6QrVIFhO0CQbgucEyTIiwSSHEYq7ArNsdmsdgQZOFYHPww/7zR0XWJ3F2IRZRX/Apn3rwZmB9vnkZZlmCYoWChmEFhoZhBYaGYQZmOUJmAaxiw/HtsxTUMw4TtRzh05959wHvHhOEESGW9TqYBHB2bZxFuPYfWGjW2h9s4gywLZFVOG358oHU50tUSrqnjTBf+KqW9Doh9+7S+wRXIumclitiHZfmI1mr/a4isOJsfKxMWSl3mKxLgV2fuK9bBJY1fIkgfad0j0uZ7k0DMZyTRW4TZkeZyJMEcZpVj3xHqJ3biDY07WIQ7kq2JUzn3tVAkSlz0nLFF7+veIQkXMDuCj52JC0XYS8TpnZ6LcdQVyQkSSJkg0BVrs1HjF/DC/SlnEcO3DJjeZ2waoaKoXtNTdcqmQj0llD5nez6NOlvRFz8yJizUDFfua6ocJI93g6vm0joSJYmSaIa5eMBRPUHtk9bk3UK4FsnzEd8aoe7DSrJ+AfqfvD9iK1FJ3tUXOssMrth2coybCQulqsn3+hk7u9jmmbNg2xfU/ywQ5lL3Ulyh/pVpC0XVRu4E5rp5bi8tD+HpMdMLkasx+XDeQ8kM0dL9ix5Kxf14QQ8lkeu+aR1RVdRC98eOj8kLdWq8u1Vgj9Cj6tQ25zrHIcXKVxLpyvHUX55YwG7invvLOxOsjjG9T4iqxryv0o2X6QjF/BewUMygsFDMoLBQzKCwUMygsFDMgJT4DTVqhIdcD2uuAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image" />
+                                    </scg:List>
+                                  </uix:TargetAnchorable.Anchors>
+                                </uix:TargetAnchorable>
+                              </uix:NGetText.Target>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NGetText>
+                            <ui:LogMessage sap2010:Annotation.AnnotationText="This activity logs the current value of the InvoiceNumber variable to provide visibility into the specific invoice number being processed. This is useful for tracking, debugging, and ensuring the correct invoice is being handled." DisplayName="Log Invoice Number" sap:VirtualizedContainerService.HintSize="354,274.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;InvoiceNumber: &quot;+InvoiceNumber]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
+                            <uix:NGetText sap2010:Annotation.AnnotationText="Extracts essential invoice BillToName from the PDF for processing." DisplayName="Get Bill To Name" sap:VirtualizedContainerService.HintSize="354,236.66666666666666" sap2010:WorkflowViewState.IdRef="NGetText_3" ScopeIdentifier="b70bcde7-be8f-42ec-a093-12fb41598a23" ScrapingOptions="None" Timeout="2" Version="V1">
+                              <uix:NGetText.Target>
+                                <uix:TargetAnchorable CVScreenId="5cf19d3d-faa6-450a-8bb9-86456f35004b" CvTextArea="864, 405, 81, 13" CvType="AnyWordGroup" DesignTimeRectangle="867, 407, 81, 12" DesignTimeScaleFactor="1.5" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl name='Rowland Grigoliis ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='text' automationid='' /&gt;" Guid="fdec3f84-803b-48bf-bdc0-0357180b64ec" ImageBase64="" InformativeScreenshot="96f3df9d1d7da471c8dff1ff6cc64706.png" ScopeSelectorArgument="&lt;wnd app='acrobat.exe' cls='AcrobatSDIWindow' title='Billing Invoice Template - Adobe Acrobat Reader (64-bit)' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                                  <uix:TargetAnchorable.Anchors>
+                                    <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
+                                      <uix:Target CVScreenId="5cf19d3d-faa6-450a-8bb9-86456f35004b" CvTextArea="873, 386, 39, 12" CvTextArgument="BILL TO" CvType="Text" DesignTimeRectangle="875, 387, 533, 13" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl name='BILL TO ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl name='BILL TO ' role='text' automationid='' check:text='BILL TO' /&gt;" Guid="444e7969-80ae-4e1f-9c5d-d49bd287276d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAhkAAAARCAYAAABw1r7PAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAGoSURBVHhe7duxboJAAMbxewpGxk7dXRz6CCwdmu7GqSuJS52YXXgBdsPUoTFpGmPYGkMHA+FhvoKKBWsqVUmw+X/Jb+C8Oxi/wGlECCGEENJCKBmEEEIIaSXrkjEejwEAAC6iTK1kZFkGAABwkuMlI/LlGCOzcyPHe1GczeU7tmw3VLKeY8vx55XNN78bx1e0G/uWhK7s2r6FB/nRp6LpsxxrO2Y5Gk0jpQf2AAAA3dWwZPTkhnF+nWoZDGWty8DbWSWjtCkbxX5Jfp0qDkfqmb6GwSIvFitFwVN+fZff/+PHWgAA0F1/LBkrLfxHWdZQwfK9hZIRK3R7Mn1Ps3Q7J32V17c299lbCwAAuqthyah+0jCy7n0t0vM+l5TqJePQmmb7AACAbmlYMso3GZnSmae+udUgCFsoGbzJAADgv+hYySjPZJSHSzmTAQDAtWpYMqqfSyz1Br5m8f6ZjOock49PNClKRnXcdhUm9Qeol4xiLC8W/LsEAICrd7xkAAAAnICSAQAAWkHJAAAArfi1ZAAAAJyrDCUDAABcVJl1ySCEEEIIuWykL0eVDJ4cotDLAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image, CV" />
+                                    </scg:List>
+                                  </uix:TargetAnchorable.Anchors>
+                                </uix:TargetAnchorable>
+                              </uix:NGetText.Target>
+                              <uix:NGetText.Text>
+                                <OutArgument x:TypeArguments="x:String">[invoiceBillToName]</OutArgument>
+                              </uix:NGetText.Text>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NGetText>
+                            <ui:LogMessage DisplayName="Log Invoice BillToName" sap:VirtualizedContainerService.HintSize="354,179.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;InvoiceBillToName: &quot; + InvoiceBillToName.ToString()]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
+                            <uix:NGetText sap2010:Annotation.AnnotationText="Extracts essential invoice Date from the PDF for processing." DisplayName="Get Date" sap:VirtualizedContainerService.HintSize="354,236.66666666666666" sap2010:WorkflowViewState.IdRef="NGetText_4" ScopeIdentifier="b70bcde7-be8f-42ec-a093-12fb41598a23" Timeout="2" Version="V1">
+                              <uix:NGetText.Target>
+                                <uix:TargetAnchorable CVScreenId="6a312e0f-21cc-497c-aa71-adb76da1298f" CvTextArea="1317, 283, 56, 11" CvType="AnyWordGroup" DesignTimeRectangle="1318, 283, 57, 13" DesignTimeScaleFactor="1" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='2016/03/28 ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl role='text' automationid='' /&gt;" Guid="931adbcf-2cc5-4a6e-8d0a-b1c99070a14e" ImageBase64="" InformativeScreenshot="db17ec789cb9f828022d7d794c3aa6b4.png" ScopeSelectorArgument="&lt;wnd app='acrobat.exe' cls='AcrobatSDIWindow' title='Billing Invoice Template - Adobe Acrobat Reader (64-bit)' /&gt;" SearchSteps="FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                                  <uix:TargetAnchorable.Anchors>
+                                    <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                                      <uix:Target CVScreenId="6a312e0f-21cc-497c-aa71-adb76da1298f" CvTextArea="1331, 260, 28, 10" CvTextArgument="DATE" CvType="Text" DesignTimeRectangle="1331, 260, 28, 10" ElementType="Icon" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl idx='2' role='graphic' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl automationid='' role='graphic' /&gt;" Guid="1b040a42-6421-41d9-a873-ea4554905bf4" SearchSteps="Selector, FuzzySelector, CV" />
+                                      <uix:Target CVScreenId="6a312e0f-21cc-497c-aa71-adb76da1298f" CvTextArea="1327, 306, 35, 10" CvTextArgument="TERMS" CvType="Text" DesignTimeRectangle="1294, 305, 102, 13" ElementType="Icon" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl idx='2' role='graphic' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl automationid='' role='graphic' /&gt;" Guid="f7bedfa8-2291-42c6-a4f6-6af4b1706694" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGoAAAARCAYAAAA1xDmVAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAHBSURBVFhH7ZY/S8QwGIf7KTJ2vMm9i4PrgUKWGw4Ht3CDy02BW0SQLi6Hkk1EOt0iGeUoHHIcGQQ5ClJ69MP8TNp4f6rObY4MDzRvmzfhfcibBmVZwtN9vChH8KIcwYtyBC/KETomKoPkEYIgaBBhzBnCX/EhhFpA0LAR74FOZlArAVqNQ1Cx1Pm/kMZ9+42ZW6DM5hDs9HDe5q+9tUtHT1QBJYa6cBG4zKpYIbkWtRvvWNaiQg5ZmHGOlbgEMd+K2IoKQFiCdfmBhJ1YKUZUZsX1Eaef9vkELPlorNE+RyxKFz+534oKyAjJ8gWM2PGBKIKI3UEkKbKD3N3BMVE/RbZUcqyo/Tih4C+66Mq0vhAX7AqnWtxtfK1znIExI6dufRs1w4T2dnOjEUS6buynfY7rROXvEANddDJAPNfFtqLodAoeWhHhGGJqcts7qsqRQ8knPHKqT+JPm9xfo32Or/Wtk7q9RRPI9KEWJeT2biLsGfMqtxGl6ji5hFjl2KSxPnkBQi5RHKzRPm63vur92z93lL536DmiStTC5jM/Cso+/936CL3Bq8r39tINOirK08SLcgQvyhG8KEfwopygxDcXMOgcCkRVNAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                                    </scg:List>
+                                  </uix:TargetAnchorable.Anchors>
+                                </uix:TargetAnchorable>
+                              </uix:NGetText.Target>
+                              <uix:NGetText.Text>
+                                <OutArgument x:TypeArguments="x:String">[InvoiceDate]</OutArgument>
+                              </uix:NGetText.Text>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NGetText>
+                            <ui:LogMessage DisplayName="Log Date" sap:VirtualizedContainerService.HintSize="354,179.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_10" Level="Info" Message="[&quot;InvoiceDate: &quot; + InvoiceDate.ToString]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
+                            <uix:NGetText sap2010:Annotation.AnnotationText="Extracts essential Quantity for Service Fee from the PDF for processing." DisplayName="Get Quantity for Service Fee" sap:VirtualizedContainerService.HintSize="354,236.66666666666666" sap2010:WorkflowViewState.IdRef="NGetText_5" ScopeIdentifier="b70bcde7-be8f-42ec-a093-12fb41598a23" ScrapingOptions="None" Timeout="2" Version="V1">
+                              <uix:NGetText.Target>
+                                <uix:TargetAnchorable CVScreenId="1c74548d-ee50-48b6-a0ad-e7a06acdf545" CvTextArea="1103, 525, 10, 12" CvType="AnyWordGroup" DesignTimeRectangle="1106, 527, 9, 12" DesignTimeScaleFactor="1.5" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='7 ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl role='text' automationid='' /&gt;" Guid="18607cec-0b43-4a92-bc27-ca55816589ca" ImageBase64="" InformativeScreenshot="676d3bbf4e9cd929424bca104c60c83a.png" ScopeSelectorArgument="&lt;wnd app='acrobat.exe' cls='AcrobatSDIWindow' title='Billing Invoice Template - Adobe Acrobat Reader (64-bit)' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                                  <uix:TargetAnchorable.Anchors>
+                                    <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                                      <uix:Target CVScreenId="1c74548d-ee50-48b6-a0ad-e7a06acdf545" CvTextArea="867, 525, 57, 12" CvTextArgument="Service Fee" CvType="Text" DesignTimeRectangle="870, 527, 56, 12" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='Service Fee ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='Service Fee ' role='text' automationid='' check:text='Service Fee' /&gt;" Guid="25c7b4db-0730-43a6-9832-223422434973" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADwAAAAQCAYAAABKkhw/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAIoSURBVFhH7VW/a9tAGNW/cbPWbNky3aTFS5YuHW7wkqG7QJt3gadCySAomdKWg4ylRFsgGLSVIrQVI9QhlBA0BGOO1+/uJFm+SKGJN8cPDuHvfn3ve987e7PZDG9pGMJvCQfC+46OsKpuMBdH8DyPBgMPJYpamblXoZIQfoxs3fx+KdYZYl/n0h9nkNVrD7RoCN8hDU/A4wVqHVUl0miCIMmxA+XdYAjvTtBFQ/gRRfKeVL1AVq3sTIcHFDICNxU+gpjfoFJrEvADuKA9bfXDlFbq5SlC9g7J9UWjsEJdSIScmXVMfEZer53YRyzce0cJD+VD4TqHDAObCxOYL6pBsTYeVhWyK4lvsQAzLW3JqyJBwGdIdULqN+Q0QJj+IcJn8IIEBZ2qSompHyF9WBPfCP5UoqSYIbzKkQQTRGkJZfYfIzj/gvM2hhVKKp7fFqzFk5b2IeRyJJ+lFSz6Ychv8nlKeeTRskmw4BOuvxKx7lI7/PgWSyLsxxls/bUlJnTxr+Z7t/Hwkr6u9/Scc6bn+n1QYd1ZQ/lc4lL4TpwjzoxBt2AJK63CMUTy03q4I5wgz3VF58i2HjB78YawMsqyEw7eVrYl3FcY98ji00bhU0ro3uwexEhLW4XdfBpLtm/QM2gU1j77jrh7pfu+6nuGBo8gi78OYYIpGgNrW7N7pV0P63Mft2KeR20p8+1k/8vDbT50Y9/Dz/zLjLT0/uJAeN9xILzfAP4BmZkweiOHIYEAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image, CV" />
+                                      <uix:Target CVScreenId="1c74548d-ee50-48b6-a0ad-e7a06acdf545" CvTextArea="1070, 503, 55, 12" CvTextArgument="QTY (hours)" CvType="Text" DesignTimeRectangle="1066, 504, 82, 12" ElementType="Icon" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl idx='2' role='graphic' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl automationid='' role='graphic' /&gt;" Guid="98f10c23-225c-4eb8-9a51-2f43458853b7" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFYAAAAQCAYAAACMV4iGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAJiSURBVFhH7ZYxa9tAGIbvV9yo0VOmLjdUQ5YOgQa0eCjZAhWaAoGCwEs8FM2BcmsJ2o2mQo2gBGNECRihEoyEf8zbu9NZOseKUVypeNDwgO5O0p2e77tPR6bTKQa6h2w2Gwx0j8rYpoGBf2MQ2xMtxa6RzO7gUAJCBNTBZJagyCP4lu6rsPDxyy3GlMIO5ijE80UcwCYjjPmjapfvXCHyP4h7fmDJP4FYPqLcnLNLnhC678D8GbLG8e5pIbZAFk3AiA2Xz8XChOTwRrTP4Uer8h4l2ILDF/oZKe1cBOAKfBGDj0cgbIIoK/S4IA3hUqbekfQutkAaeqDUQ5gaa+iRFmIzIYmB2AHiQvcVcwQ2heVHyGV7T6wgm8FnFphzuRsEhfmhIlBSbJXxIzgiizMZ0JjDZVT1U+cOs+SPEYS8vn42d857fPavxZy6TccI5qkO5Bnc8MlYR3+0F+twJFXfAtyx6r4msSKzl/wKVEoZcyy3QVHod5qCyAWCeIU4uCj71zJ4IjBy+xaPKuup+x0/D4gt59FrYzcIk3U9py5bVTL0zBszVtaqS3jfvuJa1FvqhkjlPY1iBQmHI2ruXv9OsAxBpqyF+ew2ELfg96+LLaXtZnr1P9DJcEJi6xrrhb+wVPVVbjNjWx0r9qUg8/pQxqoS8lsE+axBrDGPmaXquv6h7q6ne1qIlbw4FSgO/bw0r4ptqLF7kptq7BpF8gBP9QnprElsiph7dY1lHnh8kjW2ifJkYG9LwTGoD5V19bl5vGPyyId1WqeCvtieY//H1iznOrFz7MAxDGJ7YhDbCxv8Be5MaAvZ0s5TAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image, CV" />
+                                    </scg:List>
+                                  </uix:TargetAnchorable.Anchors>
+                                </uix:TargetAnchorable>
+                              </uix:NGetText.Target>
+                              <uix:NGetText.Text>
+                                <OutArgument x:TypeArguments="x:String">[InvoiceQuantityforServiceFee]</OutArgument>
+                              </uix:NGetText.Text>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NGetText>
+                            <ui:LogMessage DisplayName="Log Quantity for Service Fee" sap:VirtualizedContainerService.HintSize="354,179.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;InvoiceQuantityforServiceFee: &quot; + InvoiceQuantityforServiceFee]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
+                            <uix:NGetText sap2010:Annotation.AnnotationText="Extracts essential Unit Price For Service Fee from the PDF for processing." DisplayName="Get Unit Price for Service Fee" sap:VirtualizedContainerService.HintSize="354,236.66666666666666" sap2010:WorkflowViewState.IdRef="NGetText_6" ScopeIdentifier="b70bcde7-be8f-42ec-a093-12fb41598a23" ScrapingOptions="None" Timeout="2" Version="V1">
+                              <uix:NGetText.Target>
+                                <uix:TargetAnchorable CVScreenId="1c74548d-ee50-48b6-a0ad-e7a06acdf545" CvTextArea="1193, 525, 33, 12" CvType="AnyWordGroup" DesignTimeRectangle="1159, 527, 70, 12" DesignTimeScaleFactor="1.5" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name=' 200,00 ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl role='text' automationid='' /&gt;" Guid="eef42630-67fb-470e-aad2-67e403ab20ac" ImageBase64="" InformativeScreenshot="26236d6f348619779ca823f079f1ada8.png" ScopeSelectorArgument="&lt;wnd app='acrobat.exe' cls='AcrobatSDIWindow' title='Billing Invoice Template - Adobe Acrobat Reader (64-bit)' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                                  <uix:TargetAnchorable.Anchors>
+                                    <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                                      <uix:Target CVScreenId="1c74548d-ee50-48b6-a0ad-e7a06acdf545" CvTextArea="867, 525, 57, 12" CvTextArgument="Service Fee" CvType="Text" DesignTimeRectangle="870, 527, 56, 12" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='Service Fee ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='Service Fee ' role='text' automationid='' check:text='Service Fee' /&gt;" Guid="bdcc2f2b-8371-4ddd-a315-d3e79a5981fe" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADwAAAAQCAYAAABKkhw/AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAIoSURBVFhH7VW/a9tAGNW/cbPWbNky3aTFS5YuHW7wkqG7QJt3gadCySAomdKWg4ylRFsgGLSVIrQVI9QhlBA0BGOO1+/uJFm+SKGJN8cPDuHvfn3ve987e7PZDG9pGMJvCQfC+46OsKpuMBdH8DyPBgMPJYpamblXoZIQfoxs3fx+KdYZYl/n0h9nkNVrD7RoCN8hDU/A4wVqHVUl0miCIMmxA+XdYAjvTtBFQ/gRRfKeVL1AVq3sTIcHFDICNxU+gpjfoFJrEvADuKA9bfXDlFbq5SlC9g7J9UWjsEJdSIScmXVMfEZer53YRyzce0cJD+VD4TqHDAObCxOYL6pBsTYeVhWyK4lvsQAzLW3JqyJBwGdIdULqN+Q0QJj+IcJn8IIEBZ2qSompHyF9WBPfCP5UoqSYIbzKkQQTRGkJZfYfIzj/gvM2hhVKKp7fFqzFk5b2IeRyJJ+lFSz6Ychv8nlKeeTRskmw4BOuvxKx7lI7/PgWSyLsxxls/bUlJnTxr+Z7t/Hwkr6u9/Scc6bn+n1QYd1ZQ/lc4lL4TpwjzoxBt2AJK63CMUTy03q4I5wgz3VF58i2HjB78YawMsqyEw7eVrYl3FcY98ji00bhU0ro3uwexEhLW4XdfBpLtm/QM2gU1j77jrh7pfu+6nuGBo8gi78OYYIpGgNrW7N7pV0P63Mft2KeR20p8+1k/8vDbT50Y9/Dz/zLjLT0/uJAeN9xILzfAP4BmZkweiOHIYEAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image, CV" />
+                                      <uix:Target CVScreenId="1c74548d-ee50-48b6-a0ad-e7a06acdf545" CvTextArea="1158, 503, 68, 12" CvTextArgument="UNIT PRICE (" CvType="Text" DesignTimeRectangle="1158, 503, 68, 12" ElementType="Icon" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl idx='3' role='graphic' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl automationid='' role='graphic' /&gt;" Guid="e5101cb5-f798-45b0-b0fd-b3aef1a3e60e" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGYAAAAQCAYAAADkpAq+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAKGSURBVFhH7Zcxi9swFMf1KTx6zJQpi5YMt3S4oeAlw03djKeDDsWQpZkMpbP34OmgBE9HCV6OEDwcHMElBBt/mH+fLNmRfSYtCfG5Vw//QdLTs/R+0nsyWywWGNQ/sTzPMah/Km5M28Cgt9UAhpSGLsZuiLRl7K10AkyK2L8DM12EqWgnCF0u2xsfFmMw7AA7shUbMxmHG76oOTbcz2RLNjVZPuLK/wa+ZWrjBrizRJw1+0n8HkH8q76eLMZqbsEo59o+ouQgbfS5JLMZ9GQFl3+EF+0QB/fgys6wvmG9XcI2boq9HGPRvS4Cw5jcwGswjTk1IKUkABm0DEk4pwAJHz+1frIrgmhQ+wc2le89Iu9WATsgi5dwuImp94htAeYOfpw2vlcqwy5wYAg/+xCuaWDCJxhV8J4R2OPq0LX7uL4uBEOnbObjadUxmMMa3lSAWCOr+VRrPglGC3wqwDRvlQJnOAh2WWNud7oAzAS261Awx/hk350Npkw3jI1gzR9aUplIU98R6qmsOOkmLH/T8FmCKecKiXUlRxsFQ4Kg1Lf6CsuQtkUqSzItA2jzOtafwVQnRwV56iHaCjC08NUj/NlIC8C5N6a9/0DfmRll7dEOyiU3pgBThypAjDjHhA6ZHTwjj9X++glGXWlVR/LsqYBQpABt4VnkYXolMGmuakkRsFjzXa8xMt2Z4O4Dor8Co27MLqBCL2uMqYGRN+aWHgf7dh8d6AQYUu3lQ+IOfHrJ1E/UCwX/5kpgqK1qDONf4Huzo++zX2V6cSf76lVWptLe15j3KhV4kZIz2SduyPE/Rh6mHr/K3rGq/5iWVFWMfZDpuznWof5PMP+ABjA91QCml8rxG5G1YTpadedeAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image, CV" />
+                                    </scg:List>
+                                  </uix:TargetAnchorable.Anchors>
+                                </uix:TargetAnchorable>
+                              </uix:NGetText.Target>
+                              <uix:NGetText.Text>
+                                <OutArgument x:TypeArguments="x:String">[InvoiceUnitPriceForServiceFee]</OutArgument>
+                              </uix:NGetText.Text>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NGetText>
+                            <ui:LogMessage DisplayName="Log Unit for Service Fee" sap:VirtualizedContainerService.HintSize="354,179.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Info" Message="[&quot;InvoiceUnitPriceForServiceFee: &quot; + InvoiceUnitPriceForServiceFee]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
+                            <uix:NGetText sap2010:Annotation.AnnotationText="Extracts essential Quantity For Add Service from the PDF for processing." DisplayName="Get Quantity For Add'l Service" sap:VirtualizedContainerService.HintSize="354,236.66666666666666" sap2010:WorkflowViewState.IdRef="NGetText_7" ScopeIdentifier="b70bcde7-be8f-42ec-a093-12fb41598a23" ScrapingOptions="None" Timeout="2" Version="V1">
+                              <uix:NGetText.Target>
+                                <uix:TargetAnchorable CVScreenId="1c74548d-ee50-48b6-a0ad-e7a06acdf545" CvTextArea="1104, 540, 7, 12" CvType="AnyWordGroup" DesignTimeRectangle="1106, 542, 9, 12" DesignTimeScaleFactor="1.5" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='1 ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl role='text' automationid='' /&gt;" Guid="a06a164f-b3e3-4bca-875b-04f253beb920" ImageBase64="" InformativeScreenshot="a144480268565f97afcba5c5cb756d92.png" ScopeSelectorArgument="&lt;wnd app='acrobat.exe' cls='AcrobatSDIWindow' title='Billing Invoice Template - Adobe Acrobat Reader (64-bit)' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                                  <uix:TargetAnchorable.Anchors>
+                                    <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                                      <uix:Target CVScreenId="1c74548d-ee50-48b6-a0ad-e7a06acdf545" CvTextArea="867, 540, 88, 12" CvTextArgument="Addiional Services" CvType="Text" DesignTimeRectangle="870, 542, 88, 12" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='Additional Services ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='Additional Services ' role='text' automationid='' check:text='Additional Services' /&gt;" Guid="3ebf7f33-e191-496e-9145-e5d72c152dab" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFwAAAAQCAYAAACbdRhPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAM1SURBVFhH7VW/a9tAGPW/oVlrNm+ebtKSJUuWDBq8dMgu0GboUKjAUOjSQRA6hYaDLFlMtZRAEYhsRYiWUIxRhhCC0RBMEK/f/ZB8UuT+DOqiB0LWd76773v3vnej2WyGAf1hILxnDIT3jIHwntEkvPwOPt2D5UVY61ATS3B3H0FS6G+NnMO1AySP2/EyT3AeZSh2zfkrPNJWL2AHCf0yUOaI5y6s0Qgj8TAfPOuu4PfwnDk30SC8zEI4EwZm+4jWpY6a+BXh+pvwmASwXY5cfz8PuggvsY58WGyOpBA5b5BHMzAnRNZVwn+GQfgtIm8CJ7xEHBzQO6VSCKZ62BFc5mgFX2Lu7pGiLDD3iA7JUPjnCIGt1GYHpzitVV/NEWMOPJ7qDhiDsbGKW1OEqVDnGhn3weR/aQ+PIyuIzA6FS6EwDydJrnKuUaLIODxmybUt9y3ifKMEImtR8dGoEljFwQU+VMIqUnDPaebWiLmYx2LfNdJwWneZ5Z4glQJoYkv4OoKnlS0L0AqRSmUzRJRoueKYWowSuUESOGD+Anm5wYofw2pZylbhVexaFqPmEBHpCVzrEGGW0fgeWBAT+fe07r4itPiGOPqEK0FQESOQB33fbSlC1ckF+FlAa1LBFfllitDZhx+tiBCVpy3sUhA+Ens/0JkIG6XDj241B8fgq68651tkIYnJrNN5A/6uitF0wYng7Y5ytCsR7YYm/IEWPtSnXT1jSuKmVWBF3peaWIkOD39KeGtOZ9ywDOqs5JzjLKi8WRz0LsKbUMIgQj++J2LNmugReS5NC1SWZHsLLOVb3F9mbmO4fCnXVRBjdnNNmdsK2WKuDpxidTe1oAiXSjiQBSloNUw5lqloV63wfAFfKq158tIz/0nhbcJj3Bm+vO2sLsKVWMwWrglPr1p1abTvHKFsS9gaU0qvczbrpJyTOd0NWuGyI3dA8jnRazUhCZeXTvuSkUmIpK//3MPFuCya5rgv8bqK7fTwNuEJNvJwK++d4ZU7IaVddyu8yLCoO4Ge2lebHl7v+eSS1x1uVV5u5NTl12asul9uqBvasZ96+IBeMBDeMwbCe8ZAeM8YCO8VwA9ASKaxHP71SQAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image, CV" />
+                                      <uix:Target CVScreenId="1c74548d-ee50-48b6-a0ad-e7a06acdf545" CvTextArea="1070, 503, 55, 12" CvTextArgument="QTY (hours)" CvType="Text" DesignTimeRectangle="1070, 503, 55, 12" ElementType="Icon" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl idx='2' role='graphic' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl automationid='' role='graphic' /&gt;" Guid="d9c9d243-c95f-4865-9710-c1244ae46b12" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFYAAAAQCAYAAACMV4iGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAJiSURBVFhH7ZYxa9tAGIbvV9yo0VOmLjdUQ5YOgQa0eCjZAhWaAoGCwEs8FM2BcmsJ2o2mQo2gBGNECRihEoyEf8zbu9NZOseKUVypeNDwgO5O0p2e77tPR6bTKQa6h2w2Gwx0j8rYpoGBf2MQ2xMtxa6RzO7gUAJCBNTBZJagyCP4lu6rsPDxyy3GlMIO5ijE80UcwCYjjPmjapfvXCHyP4h7fmDJP4FYPqLcnLNLnhC678D8GbLG8e5pIbZAFk3AiA2Xz8XChOTwRrTP4Uer8h4l2ILDF/oZKe1cBOAKfBGDj0cgbIIoK/S4IA3hUqbekfQutkAaeqDUQ5gaa+iRFmIzIYmB2AHiQvcVcwQ2heVHyGV7T6wgm8FnFphzuRsEhfmhIlBSbJXxIzgiizMZ0JjDZVT1U+cOs+SPEYS8vn42d857fPavxZy6TccI5qkO5Bnc8MlYR3+0F+twJFXfAtyx6r4msSKzl/wKVEoZcyy3QVHod5qCyAWCeIU4uCj71zJ4IjBy+xaPKuup+x0/D4gt59FrYzcIk3U9py5bVTL0zBszVtaqS3jfvuJa1FvqhkjlPY1iBQmHI2ruXv9OsAxBpqyF+ew2ELfg96+LLaXtZnr1P9DJcEJi6xrrhb+wVPVVbjNjWx0r9qUg8/pQxqoS8lsE+axBrDGPmaXquv6h7q6ne1qIlbw4FSgO/bw0r4ptqLF7kptq7BpF8gBP9QnprElsiph7dY1lHnh8kjW2ifJkYG9LwTGoD5V19bl5vGPyyId1WqeCvtieY//H1iznOrFz7MAxDGJ7YhDbCxv8Be5MaAvZ0s5TAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image, CV" />
+                                    </scg:List>
+                                  </uix:TargetAnchorable.Anchors>
+                                </uix:TargetAnchorable>
+                              </uix:NGetText.Target>
+                              <uix:NGetText.Text>
+                                <OutArgument x:TypeArguments="x:String">[InvoiceQuantityForAddService]</OutArgument>
+                              </uix:NGetText.Text>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NGetText>
+                            <ui:LogMessage DisplayName="Log Quantity for Add Service " sap:VirtualizedContainerService.HintSize="354,179.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="Info" Message="[&quot;InvoiceQuantityForAddService: &quot; + InvoiceQuantityForAddService]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
+                            <uix:NGetText sap2010:Annotation.AnnotationText="Extracts essential Unit Price For Add Service from the PDF for processing." DisplayName="Get Unit Price for Add'l Service" sap:VirtualizedContainerService.HintSize="354,236.66666666666666" sap2010:WorkflowViewState.IdRef="NGetText_8" ScopeIdentifier="b70bcde7-be8f-42ec-a093-12fb41598a23" ScrapingOptions="None" Timeout="2" Version="V1">
+                              <uix:NGetText.Target>
+                                <uix:TargetAnchorable CVScreenId="a1e54673-54b8-4f81-9f30-78741b81b0b4" CvTextArea="1199, 539, 28, 12" CvType="AnyWordGroup" DesignTimeRectangle="1106, 541, 9, 12" DesignTimeScaleFactor="1.5" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name=' 75,00 ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl role='text' automationid='' /&gt;" Guid="573b12b6-0246-424d-9e9a-3cae35ed69ae" ImageBase64="" InformativeScreenshot="dabc3f938e06a5a7cc5bffd3c1527039.png" ScopeSelectorArgument="&lt;wnd app='acrobat.exe' cls='AcrobatSDIWindow' title='Billing Invoice Template - Adobe Acrobat Reader (64-bit)' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                                  <uix:TargetAnchorable.Anchors>
+                                    <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
+                                      <uix:Target CVScreenId="a1e54673-54b8-4f81-9f30-78741b81b0b4" CvTextArea="867, 539, 88, 12" CvTextArgument="Addiional Services" CvType="Text" DesignTimeRectangle="870, 541, 88, 12" ElementType="Text" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='Additional Services ' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl name='Additional Services ' role='text' automationid='' check:text='Additional Services' /&gt;" Guid="7f8c01c4-f3a9-49ed-b961-decf999b7302" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFwAAAAQCAYAAACbdRhPAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAM1SURBVFhH7VW/a9tAGPW/oVlrNm+ebtKSJUuWDBq8dMgu0GboUKjAUOjSQRA6hYaDLFlMtZRAEYhsRYiWUIxRhhCC0RBMEK/f/ZB8UuT+DOqiB0LWd76773v3vnej2WyGAf1hILxnDIT3jIHwntEkvPwOPt2D5UVY61ATS3B3H0FS6G+NnMO1AySP2/EyT3AeZSh2zfkrPNJWL2AHCf0yUOaI5y6s0Qgj8TAfPOuu4PfwnDk30SC8zEI4EwZm+4jWpY6a+BXh+pvwmASwXY5cfz8PuggvsY58WGyOpBA5b5BHMzAnRNZVwn+GQfgtIm8CJ7xEHBzQO6VSCKZ62BFc5mgFX2Lu7pGiLDD3iA7JUPjnCIGt1GYHpzitVV/NEWMOPJ7qDhiDsbGKW1OEqVDnGhn3weR/aQ+PIyuIzA6FS6EwDydJrnKuUaLIODxmybUt9y3ifKMEImtR8dGoEljFwQU+VMIqUnDPaebWiLmYx2LfNdJwWneZ5Z4glQJoYkv4OoKnlS0L0AqRSmUzRJRoueKYWowSuUESOGD+Anm5wYofw2pZylbhVexaFqPmEBHpCVzrEGGW0fgeWBAT+fe07r4itPiGOPqEK0FQESOQB33fbSlC1ckF+FlAa1LBFfllitDZhx+tiBCVpy3sUhA+Ens/0JkIG6XDj241B8fgq68651tkIYnJrNN5A/6uitF0wYng7Y5ytCsR7YYm/IEWPtSnXT1jSuKmVWBF3peaWIkOD39KeGtOZ9ywDOqs5JzjLKi8WRz0LsKbUMIgQj++J2LNmugReS5NC1SWZHsLLOVb3F9mbmO4fCnXVRBjdnNNmdsK2WKuDpxidTe1oAiXSjiQBSloNUw5lqloV63wfAFfKq158tIz/0nhbcJj3Bm+vO2sLsKVWMwWrglPr1p1abTvHKFsS9gaU0qvczbrpJyTOd0NWuGyI3dA8jnRazUhCZeXTvuSkUmIpK//3MPFuCya5rgv8bqK7fTwNuEJNvJwK++d4ZU7IaVddyu8yLCoO4Ge2lebHl7v+eSS1x1uVV5u5NTl12asul9uqBvasZ96+IBeMBDeMwbCe8ZAeM8YCO8VwA9ASKaxHP71SQAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image, CV" />
+                                      <uix:Target CVScreenId="a1e54673-54b8-4f81-9f30-78741b81b0b4" CvTextArea="1158, 501, 68, 13" CvTextArgument="UNIT PRICE (9" CvType="Text" DesignTimeRectangle="1066, 503, 82, 12" ElementType="Icon" FullSelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl idx='3' role='graphic' /&gt;" FuzzySelectorArgument="&lt;wnd aaname='Document Pane' cls='AVL_AVView' title='AVScrolledPageView' /&gt;&lt;wnd cls='AVL_AVView' title='AVPageView' /&gt;&lt;ctrl role='row' /&gt;&lt;ctrl automationid='' role='graphic' /&gt;" Guid="339112a4-4047-4a64-8d44-de249b2e7be2" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGYAAAAQCAYAAADkpAq+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAKGSURBVFhH7Zcxi9swFMf1KTx6zJQpi5YMt3S4oeAlw03djKeDDsWQpZkMpbP34OmgBE9HCV6OEDwcHMElBBt/mH+fLNmRfSYtCfG5Vw//QdLTs/R+0nsyWywWGNQ/sTzPMah/Km5M28Cgt9UAhpSGLsZuiLRl7K10AkyK2L8DM12EqWgnCF0u2xsfFmMw7AA7shUbMxmHG76oOTbcz2RLNjVZPuLK/wa+ZWrjBrizRJw1+0n8HkH8q76eLMZqbsEo59o+ouQgbfS5JLMZ9GQFl3+EF+0QB/fgys6wvmG9XcI2boq9HGPRvS4Cw5jcwGswjTk1IKUkABm0DEk4pwAJHz+1frIrgmhQ+wc2le89Iu9WATsgi5dwuImp94htAeYOfpw2vlcqwy5wYAg/+xCuaWDCJxhV8J4R2OPq0LX7uL4uBEOnbObjadUxmMMa3lSAWCOr+VRrPglGC3wqwDRvlQJnOAh2WWNud7oAzAS261Awx/hk350Npkw3jI1gzR9aUplIU98R6qmsOOkmLH/T8FmCKecKiXUlRxsFQ4Kg1Lf6CsuQtkUqSzItA2jzOtafwVQnRwV56iHaCjC08NUj/NlIC8C5N6a9/0DfmRll7dEOyiU3pgBThypAjDjHhA6ZHTwjj9X++glGXWlVR/LsqYBQpABt4VnkYXolMGmuakkRsFjzXa8xMt2Z4O4Dor8Co27MLqBCL2uMqYGRN+aWHgf7dh8d6AQYUu3lQ+IOfHrJ1E/UCwX/5kpgqK1qDONf4Huzo++zX2V6cSf76lVWptLe15j3KhV4kZIz2SduyPE/Rh6mHr/K3rGq/5iWVFWMfZDpuznWof5PMP+ABjA91QCml8rxG5G1YTpadedeAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image, CV" />
+                                    </scg:List>
+                                  </uix:TargetAnchorable.Anchors>
+                                </uix:TargetAnchorable>
+                              </uix:NGetText.Target>
+                              <uix:NGetText.Text>
+                                <OutArgument x:TypeArguments="x:String">[InvoiceUnitPriceForAddService]</OutArgument>
+                              </uix:NGetText.Text>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </uix:NGetText>
+                            <ui:LogMessage DisplayName="Log Quantity for Service Fee" sap:VirtualizedContainerService.HintSize="354,179.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Info" Message="[&quot;InvoiceUnitPriceForAddService: &quot; + InvoiceUnitPriceForAddService]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
+                            <ui:LogMessage sap2010:Annotation.AnnotationText="This activity logs a message indicating that the process of extracting information from a PDF has been completed. " DisplayName="Log Message- Done getting information from PDF" sap:VirtualizedContainerService.HintSize="354,234.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Trace" Message="[&quot;Done getting information from pdf&quot;]">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:LogMessage>
+                          </Sequence>
+                        </ActivityAction>
+                      </uix:NApplicationCard.Body>
+                      <uix:NApplicationCard.TargetApp>
+                        <uix:TargetApp Area="-1928, -8, 1936, 1056" Arguments="[CurrentFile.FullName]" FilePath="C:\Program Files\Adobe\Acrobat DC\Acrobat\acrobat.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAANBSURBVGhD7Zg/iBNBGMWvsdUrbBUrC40gWEgK61hYWNlYW1naWYndpbKRIILYBGwESSUI5gpBEAJWIqmsNKVN/jbjvM99cW58ud3bzc4SuOLH7n6Z75v3ZmdnZ7PnnNtpZDBkdW7viee3x9XEoee66rsIMkh84a9BR3WCASplQgaBL4iRtw4Wjx662fdvbjqdbpX5y+ez5c0rk6yfUiZkEPhiP0z8vTuy822yePq49J2QQZAVdLMvn2Wn22bx4H4pEzIIaEB1VhdlTMggaMIAOKkJGQRNGQDL27dCE3eVPiKDoEkD018/3bJ9jSbAxjshg6CSAS8Aq9fqwlk3f3ag2+ThayA/03GoNAIZBFUMzD68t85hYnn1omxThGB59ZK0ThkEVQygY8xjM+JrzN++ke3ywMuzUQMcQRxVuyI0YoAjz9Wk7B0A1BHrIzIImKiKFiF4ACvto1gj1kdkEDBRFS0CX0hVHmLQmAGu4ziq34vSiAFsAJkPdu4ZCKeP3Qn/PJTd1aY3ELxBsXza3fDXMILVCTEyf/XC2ss6GckNQBhz8SUXbMwMGEFsHffmjptizIv1ERkETFRFN2FvzmD5BHyhQSSmFH7Hte2XvEG2UfUA68T6iAwCJqqiMZgmtnnLcjaOKkVHJs1Q3DaDbWJ9RAYBE1XRkPUoZssmKLIDxfNg5LzkWDPWR2QQMFEVJestsx9t3oHjpkMZajPAtd5WFn4GejN5q8pJoY5YH5FBwERVFNCAPZg44o27ZfGAOmJ9RAYBE1VRYlOn4HpelloNpODUgCqaklMDqmhMu912rVbLdTod1+v1/ot1u12LDQYDixFch3UUSQxQTL/ft/PRaGRHmBkOh2YGJvg7YmAymch6IckMQBDPOdIQjBiMwAQNhLl5JDMAkQDn4/H4iAEK55GgXVwrJpkBgPlO0bjmOaYPf0OcUyissYlkBmJBiOGOYDph+uCcBsJ2eTRmQK1MfDbCdnkkMVAn1Q3UtEkrAne8lQyU/n9/C2CXW8XAayZjy4wPF9VJHWDkTfy/b+d3SiOQQeCT9lfnz0xpojH+arikNAIZJD5x339pfTpSMCHLG5c/+uNG8UAGdwkZ3B3c3h8hhu4KrVoKPgAAAABJRU5ErkJggg==" InformativeScreenshot="2769cdf99fab4b8c7b00dbffcafedad2.png" Selector="&lt;wnd app='acrobat.exe' cls='AcrobatSDIWindow' title='Billing Invoice Template - Adobe Acrobat Reader (64-bit)' /&gt;" Title="Sample Invoice 1.pdf - Adobe Acrobat Reader DC (64-bit)" />
+                      </uix:NApplicationCard.TargetApp>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </uix:NApplicationCard>
+                    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" sap2010:Annotation.AnnotationText="Enqueues extracted invoice data into the specified Orchestrator queue for further processing." DisplayName="Add Queue Item" FolderPath="hungnmse172371@fpt.edu.vn's workspace" sap:VirtualizedContainerService.HintSize="450.6666666666667,275.3333333333333" sap2010:WorkflowViewState.IdRef="AddQueueItem_2" Priority="Normal" QueueType="Calculate Total Cost from PDF using OCR">
+                      <ui:AddQueueItem.ItemInformation>
+                        <InArgument x:TypeArguments="x:String" x:Key="Invoice FDP File Name">[CurrentFile.Name]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Invoice Number">[InvoiceNumber]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Invoice Bill To Name">[invoiceBillToName.ToString()]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Invoice Date">[InvoiceDate]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Invoice Quantity for Service Fee">[InvoiceQuantityforServiceFee]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Unit Price for Service Fee">[InvoiceUnitPriceForServiceFee]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Quantity for Add’l Services">[InvoiceQuantityForAddService]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Unit Price for Add’l Services">[InvoiceUnitPriceForAddService]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="Status">Success</InArgument>
+                      </ui:AddQueueItem.ItemInformation>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:AddQueueItem>
+                    <ui:LogMessage DisplayName="Log Message- Done added the pdf to queue" sap:VirtualizedContainerService.HintSize="450.6666666666667,176.66666666666666" sap2010:WorkflowViewState.IdRef="LogMessage_13" Message="[&quot;Done added the pdf details to queue details&quot;]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:LogMessage>
+                    <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[out_SuccessPDF]" DisplayName="Move File to success folder" sap:VirtualizedContainerService.HintSize="450.6666666666667,196.66666666666666" sap2010:WorkflowViewState.IdRef="MoveFile_3" Overwrite="True" Path="[CurrentFile.FullName]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:MoveFile>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450.6666666666667,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_14" Message="[&quot;Done Moving the success pdf to success folder&quot; +out_SuccessPDF + CurrentFile.Name]">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:LogMessage>
+                  </Sequence>
+                </TryCatch.Try>
+                <TryCatch.Catches>
+                  <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="517.3333333333334,23.333333333333332" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ActivityAction x:TypeArguments="s:Exception">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                      </ActivityAction.Argument>
+                      <Sequence DisplayName="if it failed" sap:VirtualizedContainerService.HintSize="514.6666666666666,910" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:CommentOut sap2010:Annotation.AnnotationText="if you just want to just copy the file to failed folder you can use this activity" DisplayName="Comment Out Copy File" sap:VirtualizedContainerService.HintSize="452.6666666666667,458" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                          <ui:CommentOut.Body>
+                            <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="416,315.3333333333333" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:CopyFile ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="if you just want to just copy the file to failed folder you can use this activity" Destination="[output_failedpdf +  CurrentFile.Name]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="354,227.33333333333334" sap2010:WorkflowViewState.IdRef="CopyFile_2" Overwrite="True" Path="[CurrentFile.FullName]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:CopyFile>
+                            </Sequence>
+                          </ui:CommentOut.Body>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:CommentOut>
+                        <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[output_failedpdf]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="452.6666666666667,196.66666666666666" sap2010:WorkflowViewState.IdRef="MoveFile_4" Overwrite="True" Path="[CurrentFile.FullName]">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:MoveFile>
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="452.6666666666667,167.33333333333334" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Warn" Message="[&quot;Encounter an issue, move the file to failed folder: &quot; + output_failedpdf +  CurrentFile.Name]" />
+                      </Sequence>
+                    </ActivityAction>
+                  </Catch>
+                </TryCatch.Catches>
+              </TryCatch>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEachFileX.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:ForEachFileX>
+    </Sequence>
+  </Sequence>
+</Activity>
